@@ -1,0 +1,23 @@
+header {
+    background-color:rgb(235, 109, 214);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-right: 10px;
+}
+
+.logo img {
+    width: 120px;
+    height: auto;
+}
+
+.company-name {
+    color: #fff;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+    font-weight: bold;
+    margin-left: 400px;
+}   
