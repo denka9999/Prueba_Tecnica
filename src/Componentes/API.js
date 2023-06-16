@@ -2,14 +2,36 @@ import React, { useEffect } from "react";
 import axios from 'axios';
 import { useState } from "react";
 import Flor from "./Flor";
-import Breadcrumbs from "./Breadcrumbs";
+import { Breadcrumb, Form } from "react-bootstrap";
 
-function API() {
-  const [flores, setFlores] = useState('');
-  const [filtro, setFiltro] = useState('');
+
+function SearchBar(props) {
+
+  const setBusqueda = props.fbusqueda
+
+  const handleSearch = (event) => {
+    console.log(event.target.value)
+    setBusqueda(event.target.value.toLowerCase())
+  };
+
+
+  return (
+    <Form.Group>
+      <Form.Label> Buscador:  </Form.Label>
+      <Form.Control id="search" placeholder="Escribe un producto" onChange={handleSearch}></Form.Control>
+    </Form.Group>
+  );
+}
+
+function API(props) {
   const [busqueda, setBusqueda] = useState('');
+  const [flores, setFlores] = useState([]);
+  const [filtrados, setFiltrados] = useState([])
+
 
   useEffect(() => {
+    const productBreadcrumb = <Breadcrumb><Breadcrumb.Item active> Catálogo </Breadcrumb.Item></Breadcrumb>
+    props.funcionBreadcrumbs(productBreadcrumb)
     const URL = "https://dulces-petalos.herokuapp.com/api/product";
     axios
       .get(URL)
@@ -21,7 +43,7 @@ function API() {
           });
         }
         setFlores(arrayProducto);
-        setFiltro(arrayProducto);
+        setFiltrados(arrayProducto);
       })
       .catch((error) => {
         alert('Algo va mal');
@@ -29,17 +51,14 @@ function API() {
   }, []);
 
 
-
-  const handleSearch = (event) => {
-    const getSearch = event.target.value.toLowerCase();
-    setBusqueda(getSearch);
-    const searchdata = filtro.filter((item) =>
-      item.name.toLowerCase().includes(getSearch) ||
-      item.binomialName.toLowerCase().includes(getSearch)
-    );
-    setFlores(searchdata);
-  };
-
+  useEffect(()=>{
+    if(busqueda == ''){
+      setFiltrados(flores)
+    }else{
+      const elementos_filtrados = flores.filter((flor) => flor.name.toLowerCase().startsWith(busqueda) || flor.binomialName.toLowerCase().startsWith(busqueda))
+      setFiltrados(elementos_filtrados)
+    }
+  },[busqueda])
 
   //divison del array en 4 para que me los muestre
   // const dividirArrayEnGrupos = (array, tamañoGrupo) => {
@@ -54,37 +73,24 @@ function API() {
 
   let contenido = '';
   // variable contenido que contendra mis elementos que filtro
-  if (flores.length > 0) {
-    contenido = flores.map((elemento) => (
+  if (filtrados.length > 0) {
+    contenido = filtrados.map((elemento) => (
       <div key={elemento.id}>
         <Flor key={elemento.id} flor={elemento} />
       </div>
     ))
   }
   // declaro la barra de busqueda
-
-  function SearchBar() {
-    return (
-      <form>
-        <input
-          type="text"
-          value={busqueda}
-          onChange={handleSearch}
-          placeholder="Filtrar productos..."
-        />
-      </form>
-    );
-  }
   return (
     <>
-      <Breadcrumbs />
-      <SearchBar />
+      <div className="d-flex flex-row justify-content-end m-4">
+        <SearchBar fbusqueda={setBusqueda}/>
+      </div>
       <div className="container-fluid">
         <div className="row row-cols-4 mb-2">
           {contenido}
         </div>
       </div>
-
     </>
   );
 }
