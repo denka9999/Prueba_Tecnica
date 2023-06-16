@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import '../DiseñoComponentes/DetalleProducto.css'
+// import '../DiseñoComponentes/DetalleProducto.css'
+import { Card,Button } from "react-bootstrap";
 
 function DetalleProducto() {
 
@@ -25,23 +26,33 @@ function DetalleProducto() {
 
     return (
         <>
-            <div className="container">
 
-                <div className="card">
-                    <h4>Nombre: {propiedades.name}</h4>
-                    <h4>Nombre: {propiedades.binomialName}</h4>
-                    <h4>Nombre: {propiedades.fertilizerType}</h4>
-                    <h4>Nombre: {propiedades.price}</h4>
-                    <h4>Nombre: {propiedades.wateringsPerWeek}</h4>
-                    <h4>Nombre: {propiedades.heightInCm}</h4>
+            <Card className="mt-4">
+                <Card.Header className="text-center bold">Descripcion del producto</Card.Header>
+                <Card.Body>
+                    <div className="d-flex flex-row justify-content-between ">
+                        <div className="text-center w-100 justify-content-center align-items-center" >
+                            <p><b>Nombre:</b> {propiedades.name}</p>
+                            <p><b>Nombre Cientifico:</b> {propiedades.binomialName}</p>
+                            <p><b>Tipo de ferilizante:</b> {propiedades.fertilizerType}</p>
+                            <p><b>Precio:</b> {propiedades.price}</p>
+                            <p><b>Riegos por semana:</b> {propiedades.wateringsPerWeek}</p>
+                            <p><b>Altura:</b> {propiedades.heightInCm}</p>
+                        </div>
+                        <div className="w-50">
+                            <img className="mx-auto d-block" width={'400px'} height={'400px'}src={propiedades.imgUrl} alt='' />
+                            <Button variant="danger" onClick={handleGoBack}>VOLVER</Button>
 
-                </div>
-                <div className="card">
-                    <img src={propiedades.imgUrl} alt='' />
 
-                </div>
-            </div>
-            <button onClick={handleGoBack}>VOLVER</button>
+
+                        </div>
+                    </div>
+                </Card.Body>
+
+
+            </Card>
+
+
 
         </>
     )
