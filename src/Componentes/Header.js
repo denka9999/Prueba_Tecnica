@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from '../Imagen/logo.png';
 import '../DiseñoComponentes/Header.css';
-function Header() {
+import { Breadcrumb } from 'react-bootstrap';
+function Header(props) {
+    
     return (
         <>
             <header>
@@ -9,6 +11,9 @@ function Header() {
                     <img src={logo} alt="Logo" />
                 </div>
                 <h1 className="company-name">Dulces Pétalos</h1>
+    
+                {props.breadcrumbs}
+        
             </header>
         </>
     );
