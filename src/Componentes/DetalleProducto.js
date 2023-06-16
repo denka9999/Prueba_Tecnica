@@ -32,7 +32,7 @@ function DetalleProducto() {
                     <h4>Nombre: {propiedades.binomialName}</h4>
                     <h4>Nombre: {propiedades.fertilizerType}</h4>
                     <h4>Nombre: {propiedades.price}</h4>
-                    <h4>Nombre: {propiedades.wateringPerWeek}</h4>
+                    <h4>Nombre: {propiedades.wateringsPerWeek}</h4>
                     <h4>Nombre: {propiedades.heightInCm}</h4>
 
                 </div>

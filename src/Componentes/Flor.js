@@ -9,7 +9,8 @@ function Flor (props) {
     return (
         <div className="flower">
             <p>{propiedadesFlor.name}</p>
-            <img className="imagen" src={propiedadesFlor.imgUrl} />
+            <p>{propiedadesFlor.binomialName}</p>
+            <img className="imagen" alt="" src={propiedadesFlor.imgUrl} />
             <button>
                 <Link to={`/product/${propiedadesFlor.id}`}>Ver Detalles </Link>
             </button>
