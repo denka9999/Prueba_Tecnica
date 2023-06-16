@@ -1,0 +1,8 @@
+.container {
+    display: flex; /* Aplica un diseño flexbox */
+  }
+  
+  .card {
+    flex: 1; /* Distribuye el espacio disponible de manera equitativa entre los componentes */
+    margin-right: 10px; /* Añade un margen derecho entre los componentes */
+  }
