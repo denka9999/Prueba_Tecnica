@@ -10,7 +10,6 @@ function SearchBar(props) {
   const setBusqueda = props.fbusqueda
 
   const handleSearch = (event) => {
-    console.log(event.target.value)
     setBusqueda(event.target.value.toLowerCase())
   };
 
@@ -18,7 +17,7 @@ function SearchBar(props) {
   return (
     <Form.Group>
       <Form.Label> Buscador:  </Form.Label>
-      <Form.Control id="search" placeholder="Escribe un producto" onChange={handleSearch}></Form.Control>
+      <Form.Control id="search" placeholder="Filtre aqui..." onChange={handleSearch}></Form.Control>
     </Form.Group>
   );
 }
@@ -52,7 +51,7 @@ function API(props) {
 
 
   useEffect(()=>{
-    if(busqueda == ''){
+    if(busqueda === ''){
       setFiltrados(flores)
     }else{
       const elementos_filtrados = flores.filter((flor) => flor.name.toLowerCase().startsWith(busqueda) || flor.binomialName.toLowerCase().startsWith(busqueda))
@@ -60,19 +59,10 @@ function API(props) {
     }
   },[busqueda])
 
-  //divison del array en 4 para que me los muestre
-  // const dividirArrayEnGrupos = (array, tamañoGrupo) => {
-  //   const grupos = [];
-  //   for (let i = 0; i < array.length; i += tamañoGrupo) {
-  //     grupos.push(array.slice(i, i + tamañoGrupo));
-  //   }
-  //   return grupos;
-  // };
 
-  // const gruposFlores = dividirArrayEnGrupos(flores, 4);
 
   let contenido = '';
-  // variable contenido que contendra mis elementos que filtro
+  
   if (filtrados.length > 0) {
     contenido = filtrados.map((elemento) => (
       <div key={elemento.id}>
@@ -80,7 +70,6 @@ function API(props) {
       </div>
     ))
   }
-  // declaro la barra de busqueda
   return (
     <>
       <div className="d-flex flex-row justify-content-end m-4">

@@ -1,20 +1,23 @@
 import React from 'react';
 import logo from '../Imagen/logo.png';
-import '../DiseñoComponentes/Header.css';
-import { Breadcrumb } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 function Header(props) {
-    
+
     return (
         <>
-            <header>
-                <div className="logo">
-                    <img src={logo} alt="Logo" />
+
+            <div className="bg-primary bg-opacity-50">
+                <div className="container-fluid d-flex flex-row align-items-center ">
+                    <Link to="/">
+                        <img className="mt-4" width={'125px'} height={'125px'} src={logo} alt="Logo" />
+                    </Link>
+                    <h1 className="text-white text-center flex-grow-1">Dulces Pétalos</h1>
                 </div>
-                <h1 className="company-name">Dulces Pétalos</h1>
-    
-                {props.breadcrumbs}
-        
-            </header>
+                <div className="d-flex flex-row  justify-content-start m-2">
+                    <b>{props.breadcrumbs}</b>
+                </div>
+
+            </div>
         </>
     );
 }

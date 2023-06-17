@@ -1,5 +1,4 @@
 import React from "react";
-import '../DiseñoComponentes/Flor.css';
 import { Link } from "react-router-dom";
 import { Button, Card } from 'react-bootstrap';
 
@@ -9,14 +8,15 @@ function Flor(props) {
 
     return (
         <Card className="mt-4">
-            <Card.Header className="text-center bold">{propiedadesFlor.name}</Card.Header>
+            <Card.Header className="text-center bold"><b>{propiedadesFlor.name}</b></Card.Header>
             <Card.Body>
                 <div className="d-flex flex-row justify-content-between">
                     <div className="w-50">
-                        <img className="mx-auto d-block" width={'100px'} height={'100px'} src={propiedadesFlor.imgUrl} ></img>
+                        <img className="mx-auto d-block" width={'100px'} height={'100px'} src={propiedadesFlor.imgUrl} alt="" ></img>
                     </div>
                     <div className="w-50">
-                        <p>Hola mundo: {propiedadesFlor.binomialName} </p>
+                        <p><b>Nombre Cientifico :</b> {propiedadesFlor.binomialName} </p>
+                        <p><b>Precio :</b> {propiedadesFlor.price} $ </p>
                         <Button as={Link} variant="primary" to={`/product/${propiedadesFlor.id}`}>
                             Ver detalles
                         </Button>
