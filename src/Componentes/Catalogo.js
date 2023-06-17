@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useState } from "react";
 import Flor from "./Flor";
 import { Breadcrumb, Form } from "react-bootstrap";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 
 
 function SearchBar(props) {
@@ -16,13 +19,14 @@ function SearchBar(props) {
 
   return (
     <Form.Group>
-      <Form.Label> Buscador:  </Form.Label>
-      <Form.Control id="search" placeholder="Filtre aqui..." onChange={handleSearch}></Form.Control>
+      <Form.Label style={{ padding: '5px' }}> Filtre aqui </Form.Label>
+      <FontAwesomeIcon icon={faSearch} />
+      <Form.Control id="search" placeholder="Nombre cientifico o normal." onChange={handleSearch}></Form.Control>
     </Form.Group>
   );
 }
 
-function API(props) {
+function Catalogo(props) {
   const [busqueda, setBusqueda] = useState('');
   const [flores, setFlores] = useState([]);
   const [filtrados, setFiltrados] = useState([])
@@ -50,19 +54,19 @@ function API(props) {
   }, []);
 
 
-  useEffect(()=>{
-    if(busqueda === ''){
+  useEffect(() => {
+    if (busqueda === '') {
       setFiltrados(flores)
-    }else{
+    } else {
       const elementos_filtrados = flores.filter((flor) => flor.name.toLowerCase().startsWith(busqueda) || flor.binomialName.toLowerCase().startsWith(busqueda))
       setFiltrados(elementos_filtrados)
     }
-  },[busqueda])
+  }, [busqueda])
 
 
 
   let contenido = '';
-  
+
   if (filtrados.length > 0) {
     contenido = filtrados.map((elemento) => (
       <div key={elemento.id}>
@@ -73,7 +77,7 @@ function API(props) {
   return (
     <>
       <div className="d-flex flex-row justify-content-end m-4">
-        <SearchBar fbusqueda={setBusqueda}/>
+        <SearchBar fbusqueda={setBusqueda} />
       </div>
       <div className="container-fluid">
         <div className="row row-cols-4 mb-2">
@@ -84,4 +88,4 @@ function API(props) {
   );
 }
 
-export default API;
+export default Catalogo;
